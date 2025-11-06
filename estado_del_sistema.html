@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta de Datos Activos</title>
+    <link rel ="stylesheret" href="estado del sistema.css">
+    
+</head>
+<body>
+    <div class="container">
+        <h2>✈️ Vuelos Activos (Datos en Tiempo Real)</h2>
+        
+        <form id="activeDataForm">
+            <label for="zabbixUrl">URL de la API de Zabbix:</label>
+            <input type="text" id="zabbixUrl" value="https://TU-INSTANCIA-CLOUD/api_jsonrpc.php" required>
+            
+            <label for="authToken">Token de Autenticación (De tu inicio de sesión):</label>
+            <input type="text" id="authToken" placeholder="Ingresa el token (Auth ID)" required>
+            
+            <label for="itemId">ID del Ítem a Consultar (Ej: 23456):</label>
+            <input type="text" id="itemId" placeholder="Ej: 23456" required>
+
+            <button type="submit">Consultar Dato Activo (Item.get)</button>
+        </form>
+        
+        <div id="message"></div>
+
+        <div id="dataResult" class="result-box">
+            <p><strong>Dato Consultado:</strong> <span id="itemKey">N/A</span></p>
+            <p><strong>Último Valor:</strong> <span id="itemLastValue">---</span></p>
+            <p><strong>Timestamp:</strong> <span id="itemLastClock">---</span></p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('activeDataForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            getActiveData();
+        });
+
+        async function makeApiCall(method, params, auth) {
+            const url = document.getElementById('zabbixUrl').value;
+            const payload = {
+                "jsonrpc": "2.0",
+                "method": method,
+                "params": params,
+                "auth": auth, // Se requiere el token del usuario autenticado
+                "id": 1
+            };
+
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)
+            });
+
+            return response.json();
+        }
+
+        async function getActiveData() {
+            const authToken = document.getElementById('authToken').value;
+            const itemId = document.getElementById('itemId').value;
+            const messageDiv = document.getElementById('message');
+            
+            messageDiv.textContent = 'Buscando dato activo...';
+            messageDiv.style.color = '#333';
+
+            // --- 1. Parámetros para item.get ---
+            const itemParams = {
+                output: ["itemid", "name", "lastvalue", "key_", "lastclock"],
+                itemids: [itemId],
+                limit: 1 // Solo queremos un resultado
+            };
+
+            try {
+                // --- 2. Llamar al método item.get ---
+                const data = await makeApiCall("item.get", itemParams, authToken);
+                
+                if (data.error) {
+                    messageDiv.style.color = 'red';
+                    const errorMessage = data.error.data || data.error.message;
+                    messageDiv.textContent = `🚫 Error de API: ${errorMessage}. Verifica el token y el ID del ítem.`;
+                    
+                    document.getElementById('itemKey').textContent = 'Error';
+                    document.getElementById('itemLastValue').textContent = '---';
+                    document.getElementById('itemLastClock').textContent = '---';
+
+                } else if (data.result.length > 0) {
+                    const item = data.result[0];
+                    messageDiv.style.color = 'green';
+                    messageDiv.textContent = `✅ Dato de Ítem consultado con éxito.`;
+
+                    // Mostrar los resultados en la caja
+                    document.getElementById('itemKey').textContent = item.key_ || item.name;
+                    document.getElementById('itemLastValue').textContent = item.lastvalue;
+                    
+                    // Convertir el timestamp UNIX a un formato legible
+                    const date = new Date(item.lastclock * 1000);
+                    document.getElementById('itemLastClock').textContent = date.toLocaleString();
+                } else {
+                    messageDiv.style.color = 'orange';
+                    messageDiv.textContent = `⚠️ Ítem con ID ${itemId} no encontrado o no accesible.`;
+                    
+                    document.getElementById('itemKey').textContent = 'No Encontrado';
+                    document.getElementById('itemLastValue').textContent = '---';
+                    document.getElementById('itemLastClock').textContent = '---';
+                }
+
+            } catch (error) {
+                messageDiv.style.color = 'red';
+                messageDiv.textContent = `❌ Error de conexión o servidor: ${error.message}`;
+            }
+        }
+    </script>
+</body>
+</html>

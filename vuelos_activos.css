@@ -1,0 +1,149 @@
+/* --- Estilos Generales y Contenedor --- */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #07ACE3; /* Fondo gris claro */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 1000px; /* Ancho amplio para la tabla */
+    box-sizing: border-box;
+}
+
+/* --- Título y Formulario --- */
+h2 {
+    text-align: center;
+    color: #3f51b5;; /* Rojo para destacar "Alertas" */
+    margin-bottom: 25px;
+    font-size: 1.8em;
+    padding-bottom: 10px;
+    border-bottom: 3px solid #3f51b5;;
+}
+
+label {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    color: #555;
+    font-weight: 600;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 1em;
+}
+
+button[type="submit"] {
+    background-color: #07ACE3; /* Azul para la acción de consulta */
+    color: white;
+    padding: 12px 20px;
+    margin-top: 25px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 1.05em;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #303f9f;
+}
+
+#message {
+    margin-top: 25px;
+    padding: 15px;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+    border: 1px solid transparent;
+}
+
+/* --- Listado de Problemas (Tabla) --- */
+.problem-list {
+    margin-top: 30px;
+    overflow-x: auto;
+}
+
+.problem-list table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.problem-list th, .problem-list td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.problem-list th {
+    background-color: #ffebee; /* Rojo muy pálido para el encabezado */
+    color: #cc0000;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.9em;
+}
+
+.problem-list tr:hover {
+    background-color: #fffafb;
+}
+
+.problem-list td strong {
+    color: #333;
+}
+
+/* --- Colores de Severidad (Clases de JavaScript) --- */
+
+/* 0: No clasificado */
+.severity-0 {
+    color: #607d8b; /* Gris */
+    font-weight: bold;
+}
+
+/* 1: Información */
+.severity-1 {
+    color: #03a9f4; /* Azul Claro */
+    font-weight: bold;
+}
+
+/* 2: Advertencia */
+.severity-2 {
+    color: #ffc107; /* Amarillo/Ámbar */
+    font-weight: bold;
+}
+
+/* 3: Promedio */
+.severity-3 {
+    color: #ff9800; /* Naranja */
+    font-weight: bold;
+}
+
+/* 4: Alto */
+.severity-4 {
+    color: #f44336; /* Rojo */
+    font-weight: bold;
+}
+
+/* 5: Desastre */
+.severity-5 {
+    color: #b71c1c; /* Rojo Oscuro (Desastre) */
+    font-weight: bold;
+    font-size: 1.1em;
+}

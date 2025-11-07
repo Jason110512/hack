@@ -1,0 +1,123 @@
+/* --- Estilos Generales --- */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #07ACE3; /* Fondo gris claro */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+/* Contenedor principal para el formulario y título */
+.container {
+    background-color: #ffff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 450px; /* Ancho cómodo para el formulario */
+    box-sizing: border-box;
+    /* Agrega display flex y flex-direction column para que el h2 y el form se apilen */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra horizontalmente los ítems dentro del contenedor */
+}
+
+
+h2 {
+    text-align: center; /* Centra el texto del título */
+    color: #3f51b5; /* Azul primario para el título */
+    margin-bottom: 25px;
+    padding-bottom: 10px;
+    border-bottom: 3px solid #3f51b5;
+    font-size: 1.8em;
+    width: 100%; /* Asegura que el borde inferior se extienda por todo el ancho del contenedor */
+}
+
+/* --- Formulario --- */
+#formulario-registro {
+    /* Eliminamos el background-color, padding, border-radius y box-shadow de aquí,
+       ya que ahora el .container los maneja.
+       Solo necesitamos que ocupe el ancho disponible y tenga márgenes. */
+    width: 100%; 
+    box-sizing: border-box;
+    margin-top: 20px; /* Espacio entre el título y el formulario */
+}
+
+label {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    color: #333;
+    font-weight: 600;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="number"] {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 1em;
+    transition: border-color 0.3s;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="number"]:focus {
+    border-color: #A8B0A4; /* Verde de Zabbix/éxito */
+    outline: none;
+    box-shadow: 0 0 5px rgba(40, 167, 69, 0.2);
+}
+
+/* --- Botón de Registro --- */
+button[type="submit"] {
+    background-color: #07ACE3; /* Verde para acción principal */
+    color: white;
+    padding: 12px 20px;
+    margin-top: 30px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 1.05em;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #A8B0A4;
+}
+
+/* --- Área de Resultados (Controlada por JavaScript) --- */
+#resultado {
+    margin-top: 25px;
+    padding: 15px;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+    display: none; /* Inicialmente oculto */
+    border: 1px solid transparent;
+    width: 100%; /* Para que ocupe todo el ancho del contenedor */
+    box-sizing: border-box;
+}
+
+/* Estilos de ejemplo que el JS aplica: */
+
+/* Éxito */
+#resultado[style*="d4edda"] { 
+    border-color: #c3e6cb;
+}
+
+/* Error */
+#resultado[style*="f8d7da"] {
+    border-color: #f5c6cb;
+}
+
+/* Advertencia */
+#resultado[style*="fff3cd"] {
+    border-color: #ffeeba;
+}

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Problemas Activos</title>
+    <link rel="stylesheet" href="vuelos_activos.css">
+</head>
+<body>
+    <div class="container">
+        <h2> Vuelos Activos (Problemas / Alertas)</h2>
+        
+        <form id="problemForm">
+            <label for="zabbixUrl">URL de la API de Zabbix:</label>
+            <input type="text" id="zabbixUrl" value="https://TU-INSTANCIA-CLOUD/api_jsonrpc.php" required>
+            
+            <label for="authToken">Token de Autenticación:</label>
+            <input type="text" id="authToken" placeholder="Ingresa el token (Auth ID)" required>
+            
+            <button type="submit">Consultar Problemas Activos</button>
+        </form>
+        
+        <div id="message"></div>
+
+        <div id="problemList" class="problem-list">
+            </div>
+    </div>
+
+    <script>
+        
+    </script>
+</body>
+</html>

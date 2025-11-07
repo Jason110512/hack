@@ -3,140 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inicio de Sesión y Estado Zabbix API</title>
-    <link rel="stylesheet" href="registro.css">
-    
+    <title>Registro de Usuario Zabbix</title>
+    <link rel ="stylesheet" href="registro.css">
 </head>
 <body>
-    <div class="container">
-        <div id="loginSection">
-            <h2>Iniciar Sesión Zabbix Cloud</h2>
-            <form id="loginForm">
-                <label for="zabbixUrl">URL de la API de Zabbix:</label>
-                <input type="text" id="zabbixUrl" value="https://TU-INSTANCIA-CLOUD/api_jsonrpc.php" required>
+    <div class="container"> <h2>Registro de Nuevo Usuario Zabbix</h2> <form id="formulario-registro">
+            <label for="alias">Alias (Nombre de Usuario Zabbix):</label>
+            <input type="text" id="alias" name="alias" required>
 
-                <label for="username">Usuario:</label>
-                <input type="text" id="username" required>
+            <label for="password">Contraseña:</label>
+            <input type="password" id="password" name="password" required>
 
-                <label for="password">Contraseña:</label>
-                <input type="password" id="password" required>
+            <label for="name">Nombre:</label>
+            <input type="text" id="name" name="name">
 
-                <button type="submit">Iniciar Sesión</button>
-            </form>
-            <div id="message"></div>
-        </div>
+            <label for="surname">Apellido:</label>
+            <input type="text" id="surname" name="surname">
 
-        <div id="statusSection" class="hidden">
-            <h2>✅ Estado del Sistema Zabbix</h2>
-            <div class="status-box">
-                <p><strong>Estado:</strong> <span id="apiStatus">Conectado</span></p>
-                <p><strong>Versión de la API:</strong> <span id="apiVersion">Cargando...</span></p>
-                <p><strong>Token de Auth:</strong> <span id="authTokenDisplay"></span></p>
-                <button onclick="logout()">Cerrar Sesión</button>
-            </div>
-        </div>
+            <label for="edad">Edad (No es un campo de Zabbix):</label>
+            <input type="number" id="edad" name="edad" min="1" max="120">
+
+            <label for="anio">Año (No es un campo de Zabbix):</label>
+            <input type="number" id="anio" name="anio" min="1900" max="2050">
+
+            <label for="usrgrpid">ID del Grupo de Usuario (Ej. 7 para 'Usuarios Zabbix'):</label>
+            <input type="text" id="usrgrpid" name="usrgrpid" required value="7">
+
+            <button type="submit">Registrar Usuario en Zabbix</button>
+        </form>
+
+        <div id="resultado"></div>
     </div>
 
-    <script>
-        let globalAuthToken = '';
-        const zabbixApiUrl = document.getElementById('zabbixUrl');
-        const loginSection = document.getElementById('loginSection');
-        const statusSection = document.getElementById('statusSection');
-        const messageDiv = document.getElementById('message');
-
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            loginToZabbix();
-        });
-
-        function showSection(section) {
-            loginSection.classList.add('hidden');
-            statusSection.classList.add('hidden');
-            document.getElementById(section).classList.remove('hidden');
-        }
-        
-        function logout() {
-            globalAuthToken = '';
-            document.getElementById('password').value = ''; // Limpiar campo
-            messageDiv.textContent = 'Sesión cerrada.';
-            showSection('loginSection');
-        }
-
-        async function makeApiCall(method, params, auth = null) {
-            const payload = {
-                "jsonrpc": "2.0",
-                "method": method,
-                "params": params,
-                "id": 1
-            };
-            if (auth) {
-                payload.auth = auth;
-            }
-
-            const response = await fetch(zabbixApiUrl.value, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(payload)
-            });
-
-            return response.json();
-        }
-
-        async function loginToZabbix() {
-            messageDiv.textContent = 'Intentando iniciar sesión...';
-
-            try {
-                const data = await makeApiCall("user.login", {
-                    "user": document.getElementById('username').value,
-                    "password": document.getElementById('password').value
-                });
-                
-                if (data.error) {
-                    messageDiv.style.color = 'red';
-                    messageDiv.textContent = `Error de API: ${data.error.data}`;
-                } else {
-                    globalAuthToken = data.result;
-                    messageDiv.style.color = 'green';
-                    messageDiv.textContent = `¡Inicio de sesión exitoso!`;
-                    
-                    // Mostrar la sección de estado del sistema
-                    showSection('statusSection');
-                    document.getElementById('authTokenDisplay').textContent = globalAuthToken.substring(0, 10) + '...';
-                    
-                    // Obtener la versión de la API
-                    getApiStatus();
-                }
-            } catch (error) {
-                messageDiv.style.color = 'red';
-                messageDiv.textContent = `Error de conexión: ${error.message}`;
-            }
-        }
-
-        async function getApiStatus() {
-            document.getElementById('apiVersion').textContent = 'Cargando...';
-            document.getElementById('apiStatus').textContent = 'Conectando...';
-
-            try {
-                // Usamos apiinfo.version, no requiere el token de autenticación (auth),
-                // pero lo llamamos después del login para confirmar conexión.
-                const data = await makeApiCall("apiinfo.version", {});
-                
-                if (data.error) {
-                    document.getElementById('apiStatus').textContent = 'Error de API';
-                    document.getElementById('apiVersion').textContent = 'N/A';
-                    console.error("Error al obtener la versión:", data.error);
-                } else {
-                    document.getElementById('apiStatus').textContent = 'Conectado';
-                    document.getElementById('apiVersion').textContent = data.result;
-                }
-            } catch (error) {
-                document.getElementById('apiStatus').textContent = 'Fallo de Conexión';
-                document.getElementById('apiVersion').textContent = 'Error';
-                console.error("Error al conectar con la API:", error);
-            }
-        }
-    </script>
+    <script src="registro.js"></script>
 </body>
 </html>

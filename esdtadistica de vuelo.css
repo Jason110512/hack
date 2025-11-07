@@ -1,0 +1,144 @@
+
+/* --- Estilos Generales y Contenedor --- */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #00BFFF; /* Mantuve tu fondo azul celeste */
+    display: flex;
+    /* CAMBIO CLAVE AQUÍ: justifica el contenido al final (derecha) */
+    justify-content: flex-end; /* Alinea el contenido a la derecha */
+    align-items: center; /* Centra verticalmente */
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px; /* Un poco de padding para que no se pegue al borde derecho */
+    box-sizing: border-box; /* Asegura que el padding no cause desbordamiento */
+}
+
+.container {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 450px; /* Ancho del formulario */
+    box-sizing: border-box;
+    /* Si el contenedor no tenía flex, ahora sí */
+    display: flex;
+    flex-direction: column;
+    /* Para centrar el h2 dentro del contenedor si no estaba ya */
+    align-items: center; 
+}
+
+.container:hover {
+    transform: translateY(-2px);
+}
+
+/* --- Encabezado --- */
+h2 {
+    text-align: center;
+    color: #3f51b5; /* Verde, como en tu imagen */
+    margin-bottom: 25px;
+    font-size: 1.8em;
+    padding-bottom: 10px;
+    border-bottom: 3px solid #3f51b5;
+    width: 100%; /* Para que el borde ocupe todo el ancho */
+}
+
+/* --- Formulario y Entradas --- */
+form label {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    color: #030303;
+    font-weight: 600;
+}
+
+input[type="text"],
+input[type="datetime-local"] {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 1em;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+input[type="text"]:focus,
+input[type="datetime-local"]:focus {
+    border-color: #4CAF50;
+    outline: none;
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.4);
+}
+
+/* --- Botón --- */
+button[type="submit"] {
+    background-color: #07ACE3; /* Un tono de verde/azul profesional */
+    color: white;
+    padding: 14px 25px;
+    margin-top: 30px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 1.1em;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #004d40;
+}
+
+/* --- Área de Mensajes --- */
+#message {
+    margin-top: 20px;
+    padding: 12px;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+    /* Estilos base, el JS cambia el color */
+}
+
+/* --- Caja de Resultados (Estadísticas) --- */
+.stats-box {
+    margin-top: 35px;
+    padding: 25px;
+    background-color: #f7f7f7; 
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+}
+
+.stats-box p {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0;
+    padding: 5px 0;
+    border-bottom: 1px dashed #eee;
+}
+
+.stats-box p:last-child {
+    border-bottom: none;
+}
+
+.stats-box strong {
+    color: #555;
+    font-weight: 500;
+}
+
+.stats-box span {
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #4CAF50; /* Color principal para valores de estadísticas */
+}
+
+/* Resaltar valores clave (por ejemplo, Min y Max) */
+#minValue {
+    color: #f44336; /* Rojo para valor mínimo */
+}
+
+#maxValue {
+    color: #2196F3; /* Azul para valor máximo */
+}

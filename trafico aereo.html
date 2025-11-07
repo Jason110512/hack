@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tráfico Aéreo </title>
+    <link rel="stylesheet" href="trafico aereo.css">
+    
+</head>
+<body>
+    <div class="container">
+        <h2>✈️ Tráfico Aéreo </h2>
+        
+        <form id="trafficTrendForm">
+            <label for="zabbixUrl">URL de la API de Zabbix:</label>
+            <input type="text" id="zabbixUrl" value="https://TU-INSTANCIA-CLOUD/api_jsonrpc.php" required>
+            
+            <label for="authToken">Token de Autenticación:</label>
+            <input type="text" id="authToken" placeholder="Ingresa el token (Auth ID)" required>
+            
+            <label for="itemId">ID del Ítem (Métrica de Carga):</label>
+            <input type="text" id="itemId" placeholder="Ej: 23456 (Uso de CPU, Tráfico de Red)" required>
+
+            <label for="timeFrom">Fecha y Hora de Inicio:</label>
+            <input type="datetime-local" id="timeFrom" required>
+            
+            <label for="timeTill">Fecha y Hora de Fin:</label>
+            <input type="datetime-local" id="timeTill" required>
+
+            <button type="submit">Consultar Tráfico Aéreo</button>
+        </form>
+        
+        <div id="message"></div>
+
+        <div id="trafficResult" class="traffic-box">
+            <p><strong>Resultados por Hora/Día:</strong></p>
+            <div id="trendData">---</div>
+        </div>
+    </div>
+
+    <script src="trafico aereo.js"></script>
+</body>
+</html>

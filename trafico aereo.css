@@ -1,0 +1,122 @@
+/* --- Estilos Generales y Contenedor --- */
+body {
+    font-family: 'Roboto', Arial, sans-serif;
+    background-color: #eef2f7; /* Fondo azul grisáceo muy claro */
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Alinea arriba para evitar centrar toda la página */
+    min-height: 100vh;
+    margin: 0;
+    padding: 30px 20px;
+}
+
+.container {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px; /* Ancho cómodo para el formulario y la lista */
+    box-sizing: border-box;
+}
+
+/* --- Título y Formulario --- */
+h2 {
+    text-align: center;
+    color: #3f51b5; /* Azul primario, corporativo */
+    margin-bottom: 30px;
+    font-size: 1.8em;
+    padding-bottom: 10px;
+    border-bottom: 3px solid #3f51b5;
+}
+
+label {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    color: #4a4a4a;
+    font-weight: 600;
+}
+
+input[type="text"],
+input[type="datetime-local"] {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 1em;
+    transition: border-color 0.3s;
+}
+
+input[type="text"]:focus,
+input[type="datetime-local"]:focus {
+    border-color: #009688; /* Color de acento */
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 150, 136, 0.2);
+}
+
+button[type="submit"] {
+    background-color: #009688; /* Verde/Azul de acción */
+    color: white;
+    padding: 12px 20px;
+    margin-top: 30px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 1.05em;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #00796b;
+}
+
+/* --- Mensajes de Estado --- */
+#message {
+    margin-top: 25px;
+    padding: 15px;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+    border: 1px solid transparent;
+}
+
+/* --- Área de Resultados (Tendencias) --- */
+.traffic-box {
+    margin-top: 30px;
+    padding: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.traffic-box p {
+    font-size: 1.1em;
+    color: #3f51b5;
+    margin-top: 0;
+    padding-bottom: 10px;
+    border-bottom: 1px dashed #cfd8dc;
+}
+
+#trendData {
+    padding-top: 10px;
+}
+
+.traffic-item {
+    padding: 10px 0;
+    border-bottom: 1px dotted #e0e0e0;
+    font-size: 0.95em;
+    line-height: 1.4;
+}
+
+.traffic-item:last-child {
+    border-bottom: none;
+}
+
+.traffic-item strong {
+    color: #009688; /* Resaltar el valor promedio */
+    font-weight: 700;
+}
